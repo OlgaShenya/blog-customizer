@@ -17,21 +17,24 @@ import {
 	fontSizeOptions,
 } from 'src/constants/articleProps';
 import clsx from 'clsx';
+import { useFormClose } from '../hooks/useFormClose';
 
 type TArticleParamsProps = {
 	articleState: ArticleStateType;
 	setArticleState: React.Dispatch<React.SetStateAction<ArticleStateType>>;
-	open: boolean;
-	toggleOpen: () => void;
 };
 
 export const ArticleParamsForm = ({
 	articleState,
 	setArticleState,
-	open,
-	toggleOpen,
 }: TArticleParamsProps) => {
+	const { open, setOpen, formContainerRef } = useFormClose();
+
 	const [params, setParams] = useState<ArticleStateType>(articleState);
+
+	const toggleOpen = () => {
+		setOpen(!open);
+	};
 
 	const submitForm = (evt: React.SyntheticEvent) => {
 		evt.preventDefault();
@@ -45,7 +48,7 @@ export const ArticleParamsForm = ({
 	};
 
 	return (
-		<>
+		<div ref={formContainerRef}>
 			<ArrowButton onClick={toggleOpen} open={open} />
 			<aside className={clsx(styles.container, open && styles.container_open)}>
 				<form className={styles.form} onSubmit={submitForm}>
@@ -115,6 +118,6 @@ export const ArticleParamsForm = ({
 					</div>
 				</form>
 			</aside>
-		</>
+		</div>
 	);
 };

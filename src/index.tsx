@@ -16,7 +16,7 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
-	const [openParams, setOpenParams] = useState<boolean>(false);
+	// const [openParams, setOpenParams] = useState<boolean>(false);
 	const [articleState, setArticleState] =
 		useState<ArticleStateType>(defaultArticleState);
 	return (
@@ -34,10 +34,8 @@ const App = () => {
 			<ArticleParamsForm
 				articleState={articleState}
 				setArticleState={setArticleState}
-				open={openParams}
-				toggleOpen={() => setOpenParams((curr) => !curr)}
 			/>
-			<Article onClick={() => setOpenParams(false)} />
+			<Article />
 		</div>
 	);
 };
